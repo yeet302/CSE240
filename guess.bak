@@ -1,0 +1,14 @@
+(#%require (lib "27.ss" "srfi"))
+
+(define random-integer
+  (lambda (x)
+    
+  
+
+(define play_guess
+  (display "Guess a number from 1 to 100:")
+  (display "Enter guess ")
+  (play_guess (+ (random-integer 99) 1) 1)
+  (lambda (x)
+    if(
+    

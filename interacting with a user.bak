@@ -1,0 +1,11 @@
+(define greet
+  (lambda (name)
+    (display (string-append "Hello " name "!"))
+    (display "What is your favorite number?")
+    (let ((num (read)))
+      (if (equal? num 5)
+          (begin
+            (display "Great!")
+            (display num)
+            (display " is my favorite number too."))
+          (display (string-append (number->string num) " is ok."))))))

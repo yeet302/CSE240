@@ -1,0 +1,75 @@
+(define greet
+  (lambda (name)
+    (display (string-append "Hello " name "!"))
+    (display " What is your favorite number?")
+    (let ((num (read)))
+      (if (equal? num 5)
+          (begin
+            (display "Great! ")
+            (display num)
+            (display " is my favorite number too."))
+          (display (string-append (number->string num) " is ok."))))))
+
+(define average
+  (lambda ()
+    (accumulator 0 0 (read))))
+
+(define accumulator
+  (lambda (sum n next)
+    (if (not (number? next))
+        (compute-average sum n)
+        (accumulator (+ next sum) (+ 1 n) (read)))))
+
+(define compute-average
+  (lambda (sum n)
+    (if ( > n 0)
+        (/ sum n)
+        "no number")))
+
+(define mile-inch 63360)
+(define mypi 3.14159265)
+(define wheel-diameter 15)
+
+(define wheel-sensor (lambda ()
+                        (begin (display "get rotations per second: ")
+                               (read))))
+(define wheel-velocity (lambda (rps)
+                         (/ (* mypi wheel-diameter rps 3600)
+                            mile-inch)))
+(define body-velocity (lambda ()
+                        (begin (display "get miles per hour: ")
+                               (read))))
+(define error-detection (lambda(wv bv)
+                          (if (< (abs (- bv wv)) 0.01)
+                              (write "no action")
+                              (if (> bv wv)
+                                  (write "reduce brake force")
+                                  (write "reduce accel force")))))
+(define start-engine (lambda ()
+                       (error-detection (wheel-velocity(wheel-sensor))
+                                        (body-velocity))))
+(define main (lambda ()
+               (start-engine)))
+
+(define L '(1 2 31 4 5 66))
+
+(define list-sum
+  (lambda (L)
+    (if (null? L)
+        0
+        (+ (car L) (list-sum (cdr L))))))
+
+
+(define member?
+  (lambda (x list)
+    (cond
+      ((null? list) #f)
+      ((= x (car list)) #t)
+      (else (member? x (cdr list))))))
+
+(define max-list
+  (lambda (lst)
+    (cond
+      ((null? lst) (error "empty list"))
+      ((= (length lst) 1) (car lst))
+      (else (max (car lst) (max-list (cdr lst)))))))

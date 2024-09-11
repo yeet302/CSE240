@@ -1,0 +1,25 @@
+
+(define (exists? p? xs)
+  (if (null? xs)
+      #f
+      (or (p? (car xs))
+          (exists? p? (cdr xs)))))
+
+(exists? number? '(1 b 3))
+
+(define (forall? p? xs)
+  (if (null? xs)
+      #t
+      (and (p? (car xs))
+           (forall? p? (cdr xs)))))
+
+(forall? number? '(1 b 3))
+
+(define (filter p? xs)
+  (if (null? xs)
+      '()
+      (if (p? (car xs))
+          (cons (car xs) (filter p? (cdr xs)))
+          (filter p? (cdr xs)))))
+
+(filter number? '(1 b 3 d e 7))
